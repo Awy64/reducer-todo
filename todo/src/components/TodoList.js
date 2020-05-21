@@ -8,7 +8,6 @@ import {todoReducer, initialTodoState} from '../reducers/reducer'
 const TodoList = () => {
   // Reducer set for todo state
   const [todoState, dispatch] = useReducer(todoReducer, initialTodoState);
-  console.log(todoState)
   const [todo, setTodo] = useState('')
   const handleChange = e => {
     setTodo(e.target.value)
@@ -19,8 +18,8 @@ const TodoList = () => {
     <div>
       <h1>TodoList</h1>
       <form noValidate autoComplete="off" >
-        <TextField onChange={handleChange}  /> 
-        <Button variant="contained" onClick={() => dispatch({type: 'ADD_TODO', payload: todo})} >Submit</Button>
+        <TextField onChange={handleChange} value={todo} /> 
+        <Button variant="contained" onClick={() => {dispatch({type: 'ADD_TODO', payload: todo}); setTodo('')} } >Submit</Button>
         <Button variant="contained" onClick={() => dispatch({type: 'CLEAR_TODO'})} >Clear</Button>
       </form>
       {todoState.map(e => {
